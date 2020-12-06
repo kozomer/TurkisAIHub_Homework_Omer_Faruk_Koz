@@ -1,0 +1,75 @@
+"""
+Created on Sun Dec  6 15:22:57 2020
+
+@author: kozom
+"""
+import random
+import sys
+
+student_name=["Ömer Koz","Emirhan Koz","Ömer Cengiz","Zeynep Gülten"]
+
+counter=0
+while counter<3:
+    student_input_name=input("Name and Surname:")
+    count = student_name.count(student_input_name)
+    if count>0:
+        print("Welcome ", student_input_name)
+        break
+    else:
+        if counter==2:
+            print("Please Try Again Later")
+            break
+        counter+=1
+        
+#Below Code Takes Names of 5 Classes from the student and store them in class_names list
+class_names=[]
+for i in range(1,6):
+    class_input_name=input("Please enter "+str(i)+". Class Name:")
+    class_names.append(class_input_name)
+#Below Function takes number of class from student and evaluate it. It is assumed that student must give a number 1 to 5   
+booll=True
+while booll:
+    class_input_number=int(input("Please Enter Number of Courses You Want to Take:"))
+    if class_input_number<1 or class_input_number>5:
+        print("Please Enter a Number 1 to 5!")
+    else:
+        booll=False
+        
+
+def class_number_fail(a):
+    if a<3:
+        a="You Failed in Class!".upper()
+        return a
+    else:
+        return ""
+
+fail_class=class_number_fail(class_input_number)
+print (fail_class)
+if class_number_fail(class_input_number)=="You Failed in Class!".upper():
+    sys.exit()
+
+booll1=True
+while booll1:
+    choose_coursename_for_exam=input("choose one of the courses you want to take exam: ".title()+str(class_names)+"\n")
+    if class_names.count(choose_coursename_for_exam)==1:
+        booll1=False
+    else:
+        print("Please Enter Valid Class Name to Take Exam!")
+        
+        
+a,b,c=(random.randint(1,100),random.randint(1,100),random.randint(1,100))
+choose_course_for_exam={"Midterm":a,"Final":b,"Project":c}
+print("Your Midterm, Final and Project Grades:")
+for j in choose_course_for_exam.keys():
+    print(str(j)+": "+str(choose_course_for_exam[j]))
+determine_pass_fail=0.3*choose_course_for_exam["Midterm"]+0.5*choose_course_for_exam["Final"]+0.2*choose_course_for_exam["Project"]
+if determine_pass_fail>=90:
+    print("Your Letter Grade is AA")
+elif determine_pass_fail>=70:
+    print("Your Letter Grade is BB")
+elif determine_pass_fail>=50:
+    print("Your Letter Grade is CC")
+elif determine_pass_fail>=30:
+    print("Your Letter Grade is DD")    
+else:
+    print("Your Letter Grade is FF\nYOU FAILED IN "+choose_coursename_for_exam.upper()+" CLASS!")
