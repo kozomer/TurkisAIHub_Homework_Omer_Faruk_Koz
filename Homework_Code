@@ -18,6 +18,7 @@ while counter<3:
     else:
         if counter==2:
             print("Please Try Again Later")
+            sys.exit()
             break
         counter+=1
         
